@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:3000/api/v1
+@idOficina = 1
+
+### Obtener todas las oficinas
+GET {{baseUrl}}/oficinas
+
+### Obtener una oficina específica
+GET {{baseUrl}}/oficinas/{{idOficina}}
+
+### Crear una nueva oficina
+POST {{baseUrl}}/oficinas
+Content-Type: application/json
+
+{
+  "nombre": "Dpto de Atencion al Cliente",
+  "idReclamoTipo": "1",
+  "activo": "1"
+}
+
+### Actualizar una oficina (PATCH)
+PATCH {{baseUrl}}/oficinas/{{idOficina}}
+Content-Type: application/json
+
+{
+  "nombre": "Dpto Servicio Tecnico"  
+}
+
+### Eliminar una oficina
+DELETE {{baseUrl}}/oficinas/5
+
+### Actualizar una oficina (PUT - actualización completa)
+PUT {{baseUrl}}/oficinas/{{idOficina}}
+Content-Type: application/json
+
+{
+  "nombre": "Oficina Sucursal",
+  "direccion": "Avenida Secundaria 456",
+  "telefono": "555555555"
+}
