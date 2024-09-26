@@ -5,9 +5,9 @@ dotenv.config();
 
 export const pool = createPool({
     connectionLimit: 10,
-    host: 'localhost',
-    port: 3306,
-    database: 'reclamos',
-    user: 'luis',
-    password: 'Luisfelipe782006'
+    host: process.env.HOST,
+    port: process.env.MYSQLPORT,
+    database: process.env.DATABASE,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASS
 });
