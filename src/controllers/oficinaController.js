@@ -41,17 +41,28 @@ const getOneOficina = async (req, res) => {
  * @returns {Promise<void>}
  */
 const createNewOficina = async (req, res) => {
-  const { nombre, idReclamoTipo, activo } = req.body; // Asumimos que estos son los datos necesarios
-  
-  if (!nombre || !idReclamoTipo || !activo) {
-    return res.status(400).json({ 
-      status: "ERROR", 
-      message: "Faltan datos requeridos para crear la oficina" 
+  const cuerpo=req.body;
+  //const { nombre, idReclamoTipo, activo } = req.body; 
+  //if (!nombre || !idReclamoTipo || !activo) {
+  //  return res.status(400).json({ 
+  //    status: "ERROR", 
+  //    message: "Faltan datos requeridos para crear la oficina" 
+  //  });
+  //}
+  if (!cuerpo.nombre || !cuerpo.idReclamoTipo || !cuerpo.activo){
+    return res.status(400).json({
+      status:'Error',
+      message:"Faltan datos requeridos para crear la oficina"
     });
   }
-  
+  const newOficina={
+    nombre: cuerpo.nombre,
+    idReclamoTipo: cuerpo.idReclamoTipo,
+    activo:cuerpo.activo
+  }
+
   try {
-    const nuevaOficina = await oficinaService.createNewOficina({ nombre, idReclamoTipo, activo });
+    const nuevaOficina = await oficinaService.createNewOficina(newOficina);
     res.status(201).json({ 
       status: "OK", 
       data: nuevaOficina, 

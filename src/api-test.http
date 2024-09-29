@@ -22,7 +22,8 @@ PATCH {{baseUrl}}/oficinas/{{idOficina}}
 Content-Type: application/json
 
 {
-  "nombre": "Dpto Servicio Tecnico"  
+  "nombre": "Dpto Servicio Tecnico" , 
+  "activo":2
 }
 
 ### Eliminar una oficina
@@ -33,7 +34,7 @@ PUT {{baseUrl}}/oficinas/{{idOficina}}
 Content-Type: application/json
 
 {
-  "nombre": "Oficina Sucursal",
+  "nombre": "Dpto Servicio Tecnico",
   "direccion": "Avenida Secundaria 456",
   "telefono": "555555555"
 }

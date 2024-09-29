@@ -38,17 +38,15 @@ const getOneOficina = async (id) => {
  * @throws {Error} Si no se puede crear la oficina o si ocurre un error en la base de datos.
  */
 const createNewOficina = async (oficinaData) => {
-  const { nombre, idReclamoTipo, activo } = oficinaData;
-  const consulta =
-    "INSERT INTO oficinas (nombre, idReclamoTipo, activo) VALUES (?, ?, ?)";
+  const campos = Object.keys(oficinaData);
+  const valores = Object.values(oficinaData);
+  const signoInterrogacion = campos.map(() => '?').join(', ');
+  const consulta = `INSERT INTO oficinas (${campos.join(', ')}) VALUES (${signoInterrogacion})`;
+  
   try {
-    const [result] = await pool.query(consulta, [
-      nombre,
-      idReclamoTipo,
-      activo,
-    ]);
+    const [result] = await pool.query(consulta, valores);
     if (result.affectedRows > 0) {
-      return { id: result.insertId, nombre, idReclamoTipo, activo };
+      return { id: result.insertId, ...oficinaData };
     } else {
       throw new Error("No se pudo crear la oficina");
     }
@@ -74,12 +72,15 @@ const updateOneOficina = async (id, oficinaData) => {
 
   try {
     const [result] = await pool.query(consulta, [...valores, id]);
+    //consulta para mostrar objeto actualizado
+    //const afterUpdate =`SELECT ${campos.map((campo)=>`${campo}`).join(", ")} FROM oficinas WHERE idOficina = ?`
+
+   //Si hubo una linea afectada entonces consulto una vez mas en la base de datos para traer y mostrar el objeto actualizado 
     if (result.affectedRows > 0) {
-      const [oficinaActualizada] = await pool.query(
-        "SELECT * FROM oficinas WHERE idOficina = ?",
-        [id]
-      );
-      return oficinaActualizada[0];
+      return {
+        info:"Campos actualizados",
+        campos_actualizados : campos.map((campo)=>`${campo}`).join(", ")
+      } 
     } else {
       return null;
     }
