@@ -42,13 +42,7 @@ const getOneOficina = async (req, res) => {
  */
 const createNewOficina = async (req, res) => {
   const cuerpo=req.body;
-  //const { nombre, idReclamoTipo, activo } = req.body; 
-  //if (!nombre || !idReclamoTipo || !activo) {
-  //  return res.status(400).json({ 
-  //    status: "ERROR", 
-  //    message: "Faltan datos requeridos para crear la oficina" 
-  //  });
-  //}
+  
   if (!cuerpo.nombre || !cuerpo.idReclamoTipo || !cuerpo.activo){
     return res.status(400).json({
       status:'Error',

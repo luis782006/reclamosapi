@@ -72,8 +72,7 @@ const updateOneOficina = async (id, oficinaData) => {
 
   try {
     const [result] = await pool.query(consulta, [...valores, id]);
-    //consulta para mostrar objeto actualizado
-    //const afterUpdate =`SELECT ${campos.map((campo)=>`${campo}`).join(", ")} FROM oficinas WHERE idOficina = ?`
+    
 
    //Si hubo una linea afectada entonces consulto una vez mas en la base de datos para traer y mostrar el objeto actualizado 
     if (result.affectedRows > 0) {
